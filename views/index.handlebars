@@ -1,0 +1,51 @@
+<div class="header-container">
+  <h1>Eat-Da-Burger!</h1>
+</div>
+
+<div class="main-container">
+  <section id="available-hamburgers">
+    <h2>I want these Burgers!</h2>
+    <ul id="burger-list">
+      {{#each burgers}}
+        {{#unless this.devour}}
+          <li class="available-burger">
+            <span class="burgers">
+              {{this.id}}
+              {{this.burger_name}}
+            </span>
+            <span id="devour-button">
+              <form action="/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="devour" value="true">
+                <button class="devour-button" type="submit">Devour it!</button>
+              </form>
+            </span>
+          </li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </section>
+  <section id="devour-hamburgers">
+  <h2>Ate Burgers YUM!</h2>
+    <ul>
+      {{#each burgers}}
+        {{#if this.devour}}
+          <li class="devour-burger">
+            {{this.id}}
+            {{this.burger_name}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </section>
+  <section id ="new-burger">
+    <form class="create-update-form" action="/" method="POST">
+
+      <div class="form-group">
+        <textarea id="new-burger-text" rows="4" name="burger_name"></textarea>
+      </div>
+
+      <button type="submit" id="new-burger-submit">Submit Your Burger!</button>
+    </form>
+
+  </section>
+</div>
